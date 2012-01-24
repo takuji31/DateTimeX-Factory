@@ -9,6 +9,7 @@ my $buiild = Module::Build->new(
     module_name => 'DateTime::Factory',
     configure_requires => {'Module::Build' => '0.38'},
     requires => {
+        'Data::Validator'    => '0.05',
         'DateTime'           => 0,
         'DateTime::TimeZone' => 0,
         'Mouse'              => 0,

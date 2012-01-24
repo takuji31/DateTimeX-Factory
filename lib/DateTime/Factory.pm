@@ -5,6 +5,7 @@ use warnings;
 
 our $VERSION = '0.01';
 
+use Data::Validator;
 use DateTime;
 use DateTime::TimeZone;
 
@@ -49,6 +50,38 @@ our @METHODS = (
         }
     }
 }
+
+sub strptime {
+    state $validator = Data::Validator->new(
+        string  => {isa => 'Str'},
+        pattern => {isa => 'Str'},
+    )->with(qw/Method Sequenced/);
+    my ($invocant, $args) = $validator->validate(@_);
+    return DateTime::Format::Strptime->new(
+        pattern => $args->{pattern},
+        $invocant->default_options,
+    )->parse_datetime($args->{string});
+}
+
+sub parse_mysql_datetime {
+    state $validator = Data::Validator->new(
+        string  => {isa => 'Str'},
+    )->with(qw/Method Sequenced/);
+    my ($invocant, $args) = $validator->validate(@_);
+    return if $args->{string} eq '0000-00-00 00:00:00';
+    return $invocant->strptime($args->{string}, '%Y-%m-%d %H:%M:%S');
+}
+
+sub parse_ymd {
+    state $validator = Data::Validator->new(
+        string  => {isa => 'Str'},
+    )->with(qw/Method Sequenced/);
+    my ($invocant, $args) = $validator->validate(@_);
+    return if $args->{string} eq '0000-00-00';
+    return $invocant->strptime($args->{string}, '%Y-%m-%d');
+}
+
+*parse_mysql_date = \&parse_ymd;
 
 sub default_options {
     my $invocant = shift;
