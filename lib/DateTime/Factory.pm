@@ -44,7 +44,7 @@ our @METHODS = (
         my $alias  = ref $meth ? $meth->[1] : $meth;
         my $code = sub {
             my $invocant = shift;
-            DateTime->$origin($invocant->default_options, @_);
+            DateTime->$origin($invocant->_default_options, @_);
         };
         {
             no strict 'refs';
@@ -61,7 +61,7 @@ sub strptime {
     my ($invocant, $args) = $validator->validate(@_);
     return DateTime::Format::Strptime->new(
         pattern => $args->{pattern},
-        $invocant->default_options,
+        $invocant->_default_options,
     )->parse_datetime($args->{string});
 }
 
@@ -88,7 +88,7 @@ sub parse_ymd {
 sub yesterday {shift->today(@_)->subtract(days => 1)}
 sub tommorow  {shift->today(@_)->add(days => 1)}
 
-sub default_options {
+sub _default_options {
     my $invocant = shift;
     my %options = (time_zone => ref $invocant ? $invocant->time_zone : $TIME_ZONE);
     return wantarray ? %options : {%options};
