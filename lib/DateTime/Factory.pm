@@ -65,7 +65,7 @@ sub strptime {
     )->parse_datetime($args->{string});
 }
 
-sub parse_mysql_datetime {
+sub from_mysql_datetime {
     state $validator = Data::Validator->new(
         string  => {isa => 'Str'},
     )->with(qw/Method Sequenced/);
@@ -74,16 +74,23 @@ sub parse_mysql_datetime {
     return $invocant->strptime($args->{string}, '%Y-%m-%d %H:%M:%S');
 }
 
-sub parse_ymd {
+sub from_ymd {
+    state $validator = Data::Validator->new(
+        string  => {isa => 'Str'},
+        delimiter => {isa => 'Str'},
+    )->with(qw/Method Sequenced/);
+    my ($invocant, $args) = $validator->validate(@_);
+    return $invocant->strptime($args->{string}, join $args->{delimiter}, '%Y','%m','%d');
+}
+
+sub from_mysql_date {
     state $validator = Data::Validator->new(
         string  => {isa => 'Str'},
     )->with(qw/Method Sequenced/);
     my ($invocant, $args) = $validator->validate(@_);
     return if $args->{string} eq '0000-00-00';
-    return $invocant->strptime($args->{string}, '%Y-%m-%d');
+    return $invocant->from_ymd($args->{string});
 }
-
-*parse_mysql_date = \&parse_ymd;
 
 sub yesterday {shift->today(@_)->subtract(days => 1)}
 sub tommorow  {shift->today(@_)->add(days => 1)}
