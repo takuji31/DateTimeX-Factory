@@ -14,8 +14,8 @@ my $buiild = Module::Build->new(
         'Mouse'              => 0,
     },
     build_requires => {
-        'Test::LoadAllModules'       => '0.021',
-        'Test::More'                 => '0.98',
+        'Test::LoadAllModules'       => '0.02',
+        'Test::More'                 => '0.96',
     },
     test_files => (-d '.git/' || $ENV{RELEASE_TESTING}) ? 't/ xt/' : 't/',
     recursive_test_files => 1,

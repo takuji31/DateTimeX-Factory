@@ -5,7 +5,8 @@ MANIFEST			This list of files
 MANIFEST.SKIP
 README
 t/000_load.t
-t/001_basic.t
+t/001_new.t
+t/002_time_zone.t
 xt/perlcritic.t
 xt/pod.t
 xt/podcoverage.t
