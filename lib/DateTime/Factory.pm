@@ -139,12 +139,7 @@ Call DateTime->new with default parameter.
 
   my $datetime = DateTime::Factory->create(years => 2012, months => 1, days => 24, hours => 23, minutes => 16, seconds => 5);
 
-=head2 C<< now(%params) >>
-=head2 C<< today(%params) >>
-=head2 C<< from_epoch(%params) >>
-=head2 C<< from_object(%params) >>
-=head2 C<< last_day_of_month(%params) >>
-=head2 C<< from_day_of_year(%params) >>
+=head2 C<< now(%params) >>, C<< today(%params) >>, C<< from_epoch(%params) >>, C<< from_object(%params) >>, C<< last_day_of_month(%params) >>, C<< from_day_of_year(%params) >>
 
 See document of L<DateTime>.
 But, these methods create DateTime instance by original method with default parameter.
