@@ -65,5 +65,6 @@
 \.o(?:|bj|ld|ut)$
 \.sw(?:p|o)
 nytprof
-.dim.pl
-.shipit
+\.dim\.pl
+\.shipit
+README\.pod
