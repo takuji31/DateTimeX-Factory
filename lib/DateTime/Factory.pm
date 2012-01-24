@@ -14,7 +14,9 @@ our $TIME_ZONE = $DEFAULT_TIME_ZONE;
 
 use Mouse::Util::TypeConstraints;
 
-class_type('DateTime::TimeZone');
+#avoid redefine error
+eval { class_type('DateTime::TimeZone') };
+
 coerce 'DateTime::TimeZone' => from 'Str' => via { DateTime::TimeZone->new(name => $_) };
 
 no Mouse::Util::TypeConstraints;
