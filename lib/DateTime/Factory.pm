@@ -83,6 +83,9 @@ sub parse_ymd {
 
 *parse_mysql_date = \&parse_ymd;
 
+sub yesterday {shift->today(@_)->subtract(days => 1)}
+sub tommorow  {shift->today(@_)->add(days => 1)}
+
 sub default_options {
     my $invocant = shift;
     my %options = (time_zone => ref $invocant ? $invocant->time_zone : $TIME_ZONE);
