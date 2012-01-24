@@ -106,7 +106,7 @@ __END__
 
 =head1 NAME
 
-DateTime::Factory - Perl extention to do something
+DateTime::Factory - DateTime factory module with default timezone.
 
 =head1 VERSION
 
@@ -116,25 +116,89 @@ This document describes DateTime::Factory version 0.01.
 
     use DateTime::Factory;
 
+    #Object interface
     my $factory = DateTime::Factory->new(
         time_zone => 'Asia/Tokyo',
     );
+    my $now = $factory->now;
+
+    #Class interface
+    local $DateTime::Factory::TIME_ZONE = DateTime::TimeZone->new(name => 'Asia/Tokyo');
+    my $now = DateTime::Factory->now;
 
 =head1 DESCRIPTION
 
-# TODO
+DateTime factory module with default timezone.
+This module include wrapper of default constractors and some useful methods.
 
-=head1 INTERFACE
+=head1 METHODS
 
-=head2 Functions
+=head2 C<< create(%params) >>
 
-=head3 C<< hello() >>
+Call DateTime->new with default parameter.
 
-# TODO
+  my $datetime = DateTime::Factory->create(years => 2012, months => 1, days => 24, hours => 23, minutes => 16, seconds => 5);
+
+=head2 C<< now(%params) >>
+=head2 C<< today(%params) >>
+=head2 C<< from_epoch(%params) >>
+=head2 C<< from_object(%params) >>
+=head2 C<< last_day_of_month(%params) >>
+=head2 C<< from_day_of_year(%params) >>
+
+See document of L<DateTime>.
+But, these methods create DateTime instance by original method with default parameter.
+
+=head2 C<< strptime($string, $pattern) >>
+
+Parse string by DateTime::Format::Strptime with default parameter.
+
+  my $datetime = DateTime::Factory->strptime('2012-01-24 23:16:05', '%Y-%m-%d %H:%M:%S');
+
+=head2 C<< from_mysql_datetime($string) >>
+
+Parse MySQL DATETIME string with default parameter.
+
+  #equals my $datetime = DateTime::Factory->strptime('2012-01-24 23:16:05', '%Y-%m-%d %H:%M:%S');
+  my $datetime = DateTime::Factory->from_mysql_datetime('2012-01-24 23:16:05');
+
+=head2 C<< from_mysql_date($string) >>
+
+Parse MySQL DATE string with default parameter.
+
+  #equals my $date = DateTime::Factory->strptime('2012-01-24', '%Y-%m-%d');
+  my $date = DateTime::Factory->from_mysql_date('2012-01-24');
+
+=head2 C<< from_ymd($string, $delimiter) >>
+
+Parse string like DateTime::ymd return value with default parameter.
+
+  #equals my $date = DateTime::Factory->strptime('2012/01/24', '%Y/%m/%d');
+  my $date = DateTime::Factory->from_ymd('2012-01-24', '/');
+
+=head2 C<< tommorow(%params) >>
+
+Create next day DateTime instance.
+
+  #equals my $tommorow = DateTime::Factory->today->add(days => 1);
+  my $tommorow = DateTime::Factory->tommorow;
+
+=head2 C<< yesterday(%params) >>
+
+Create previous day DateTime instance.
+
+  #equals my $yesterday = DateTime::Factory->today->subtract(days => 1);
+  my $yesterday = DateTime::Factory->yesterday;
 
 =head1 DEPENDENCIES
 
 Perl 5.10.0 or later.
+L<Data::Validator>
+L<DateTime>
+L<DateTime::Format::MySQL>
+L<DateTime::Format::Strptime>
+L<DateTime::TimeZone>
+L<Mouse>
 
 =head1 BUGS
 
