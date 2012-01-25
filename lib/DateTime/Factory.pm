@@ -27,19 +27,19 @@ has time_zone => (is => 'rw', isa => 'DateTime::TimeZone', coerce => 1, default 
 
 no Mouse;
 
-our @METHODS = (
-    [new => 'create'],
-    qw/
-        from_epoch
-        now
-        today
-        from_object
-        last_day_of_month
-        from_day_of_year
-    /,
-);
 
 {
+    my @METHODS = (
+        [new => 'create'],
+        qw/
+            from_epoch
+            now
+            today
+            from_object
+            last_day_of_month
+            from_day_of_year
+        /,
+    );
     for my $meth (@METHODS) {
         my $origin = ref $meth ? $meth->[0] : $meth;
         my $alias  = ref $meth ? $meth->[1] : $meth;
