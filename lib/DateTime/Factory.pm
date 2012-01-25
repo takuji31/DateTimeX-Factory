@@ -99,7 +99,7 @@ sub tommorow  {shift->today(@_)->add(days => 1)}
 sub _default_options {
     my $invocant = shift;
     my %options = (time_zone => ref $invocant ? $invocant->time_zone : $TIME_ZONE);
-    return wantarray ? %options : {%options};
+    return %options;
 }
 
 1;
