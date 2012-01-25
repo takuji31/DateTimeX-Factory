@@ -23,7 +23,7 @@ coerce 'DateTime::TimeZone' => from 'Str' => via { DateTime::TimeZone->new(name 
 no Mouse::Util::TypeConstraints;
 use Mouse;
 
-has time_zone => (is => 'rw', isa => 'DateTime::TimeZone', coerce => 1, default => $DEFAULT_TIME_ZONE);
+has time_zone => (is => 'rw', isa => 'DateTime::TimeZone', coerce => 1, default => sub { $DEFAULT_TIME_ZONE });
 
 no Mouse;
 
