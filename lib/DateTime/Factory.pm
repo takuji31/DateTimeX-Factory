@@ -8,6 +8,7 @@ our $VERSION = '0.01';
 use Data::Validator;
 use DateTime;
 use DateTime::TimeZone;
+use DateTime::Format::Strptime;
 
 my  $DEFAULT_TIME_ZONE = DateTime::TimeZone->new(name => 'floating');
 our $TIME_ZONE = $DEFAULT_TIME_ZONE;
