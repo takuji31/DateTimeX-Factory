@@ -78,7 +78,7 @@ sub from_mysql_datetime {
 sub from_ymd {
     state $validator = Data::Validator->new(
         string  => {isa => 'Str'},
-        delimiter => {isa => 'Str'},
+        delimiter => {isa => 'Str', default => '-'},
     )->with(qw/Method Sequenced/);
     my ($invocant, $args) = $validator->validate(@_);
     return $invocant->strptime($args->{string}, join $args->{delimiter}, '%Y','%m','%d');
