@@ -1,7 +1,7 @@
 use strict;
 use Test::More;
 
-use DateTime::Factory;
+use DateTimeX::Factory;
 
 my @time_zones = qw(
     Asia/Tokyo
@@ -11,7 +11,7 @@ my @time_zones = qw(
 subtest "instance method" => sub {
 
     for my $tz (@time_zones) {
-        my $instance = DateTime::Factory->new(
+        my $instance = DateTimeX::Factory->new(
             time_zone => $tz,
         );
         is($instance->now->time_zone->name => $tz, "Correct time zone $tz from instance method");
@@ -22,8 +22,8 @@ subtest "instance method" => sub {
 subtest "class method" => sub {
 
     for my $tz (@time_zones) {
-        local $DateTime::Factory::TIME_ZONE = DateTime::TimeZone->new(name => $tz);
-        is(DateTime::Factory->now->time_zone->name => $tz, "Correct time zone $tz from class method");
+        local $DateTimeX::Factory::TIME_ZONE = DateTime::TimeZone->new(name => $tz);
+        is(DateTimeX::Factory->now->time_zone->name => $tz, "Correct time zone $tz from class method");
     }
 
 };

@@ -1,11 +1,11 @@
 use strict;
 use Test::More;
 
-use DateTime::Factory;
+use DateTimeX::Factory;
 
-my $instance = DateTime::Factory->new(
+my $instance = DateTimeX::Factory->new(
     time_zone => 'floating',
 );
-isa_ok($instance => 'DateTime::Factory', 'new method returns object');
+isa_ok($instance => 'DateTimeX::Factory', 'new method returns object');
 
 done_testing;

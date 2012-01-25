@@ -1,7 +1,7 @@
 use strict;
 use Test::More;
 
-use DateTime::Factory;
+use DateTimeX::Factory;
 
 my @time_zones = qw(
     Asia/Tokyo
@@ -10,7 +10,7 @@ my @time_zones = qw(
 );
 
 for my $tz (@time_zones) {
-    my $factory = DateTime::Factory->new(
+    my $factory = DateTimeX::Factory->new(
         time_zone => $tz,
     );
     my $dt = $factory->now;

@@ -4,9 +4,9 @@ use Module::Build;
 
 my $buiild = Module::Build->new(
     dist_author => 'takuji@senchan.jp <takuji@senchan.jp>',
-    dist_abstract => 'DateTime-Factory',
+    dist_abstract => 'DateTimeX-Factory',
     license     => 'perl',
-    module_name => 'DateTime::Factory',
+    module_name => 'DateTimeX::Factory',
     configure_requires => {'Module::Build' => '0.38'},
     requires => {
         'Data::Validator'    => '0.05',
