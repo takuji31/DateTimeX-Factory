@@ -1,12 +1,18 @@
 Build.PL
 Changes
 lib/DateTime/Factory.pm
+LICENSE
+Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
+META.json
+META.yml
 README
 t/000_load.t
 t/001_new.t
 t/002_time_zone.t
+t/003_constructors.t
+t/004_parse_methods.t
 xt/perlcritic.t
 xt/pod.t
 xt/podcoverage.t

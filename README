@@ -1,39 +1,89 @@
-This is Perl module DateTime::Factory.
+NAME
+    DateTime::Factory - DateTime factory module with default timezone.
 
-INSTALLATION
+VERSION
+    This document describes DateTime::Factory version 0.01.
 
-Type the following command:
+SYNOPSIS
+        use DateTime::Factory;
 
-    $ curl -L http://cpanmin.us | perl - DateTime::Factory
+        #Object interface
+        my $factory = DateTime::Factory->new(
+            time_zone => 'Asia/Tokyo',
+        );
+        my $now = $factory->now;
 
-Or install cpanm and then run the following command to install
-DateTime::Factory:
+        #Class interface
+        local $DateTime::Factory::TIME_ZONE = DateTime::TimeZone->new(name => 'Asia/Tokyo');
+        my $now = DateTime::Factory->now;
 
-    $ cpanm DateTime::Factory
+DESCRIPTION
+    DateTime factory module with default timezone. This module include
+    wrapper of default constractors and some useful methods.
 
-If you get an archive of this distribution, unpack it and build it
-as per the usual:
+METHODS
+  "create(%params)"
+    Call DateTime->new with default parameter.
 
-    $ tar xzf DateTime-Factory-$version.tar.gz
-    $ cd DateTime-Factory-$version
-    $ perl Build.PL
-    $ ./Build && ./Build test
+      my $datetime = DateTime::Factory->create(years => 2012, months => 1, days => 24, hours => 23, minutes => 16, seconds => 5);
 
-Then install it:
+  "now(%params)", "today(%params)", "from_epoch(%params)", "last_day_of_month(%params)", "from_day_of_year(%params)"
+    See document of DateTime. But, these methods create DateTime instance by
+    original method with default parameter.
 
-    $ ./Build install
+  "strptime($string, $pattern)"
+    Parse string by DateTime::Format::Strptime with default parameter.
 
-DOCUMENTATION
+      my $datetime = DateTime::Factory->strptime('2012-01-24 23:16:05', '%Y-%m-%d %H:%M:%S');
 
-DateTime::Factory documentation is available as in POD. So you can do:
+  "from_mysql_datetime($string)"
+    Parse MySQL DATETIME string with default parameter.
 
-    $ perldoc DateTime::Factory
+      #equals my $datetime = DateTime::Factory->strptime('2012-01-24 23:16:05', '%Y-%m-%d %H:%M:%S');
+      my $datetime = DateTime::Factory->from_mysql_datetime('2012-01-24 23:16:05');
 
-to read the documentation online with your favorite pager.
+  "from_mysql_date($string)"
+    Parse MySQL DATE string with default parameter.
+
+      #equals my $date = DateTime::Factory->strptime('2012-01-24', '%Y-%m-%d');
+      my $date = DateTime::Factory->from_mysql_date('2012-01-24');
+
+  "from_ymd($string, $delimiter)"
+    Parse string like DateTime::ymd return value with default parameter.
+
+      #equals my $date = DateTime::Factory->strptime('2012/01/24', '%Y/%m/%d');
+      my $date = DateTime::Factory->from_ymd('2012-01-24', '/');
+
+  "tommorow(%params)"
+    Create next day DateTime instance.
+
+      #equals my $tommorow = DateTime::Factory->today->add(days => 1);
+      my $tommorow = DateTime::Factory->tommorow;
+
+  "yesterday(%params)"
+    Create previous day DateTime instance.
+
+      #equals my $yesterday = DateTime::Factory->today->subtract(days => 1);
+      my $yesterday = DateTime::Factory->yesterday;
+
+DEPENDENCIES
+    Perl 5.10.0 or later. Data::Validator DateTime DateTime::Format::MySQL
+    DateTime::Format::Strptime DateTime::TimeZone Mouse
+
+BUGS
+    All complex software has bugs lurking in it, and this module is no
+    exception. If you find a bug please either email me, or add the bug to
+    cpan-RT.
+
+SEE ALSO
+    perl
+
+AUTHOR
+    Nishibayashi Takuji <takuji@senchan.jp>
 
 LICENSE AND COPYRIGHT
+    Copyright (c) 2012, Nishibayashi Takuji. All rights reserved.
 
-Copyright (c) 2012, Nishibayashi Takuji. All rights reserved.
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.

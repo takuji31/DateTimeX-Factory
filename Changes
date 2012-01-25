@@ -1,5 +1,4 @@
 Revision history for Perl extension DateTime::Factory
 
-NEXT <<SET RELEASE DATE HERE>>
-    - original version; created by dim
-      at Thu Jan 19 23:10:02 2012.
+0.01 Wed Jan 01/25/12 23:34:30 2012
+    - original version
