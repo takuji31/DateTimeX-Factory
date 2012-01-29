@@ -1,4 +1,7 @@
 Revision history for Perl extension DateTime::Factory
 
+0.02 Sun Jan 01/29/12 11:44:47 2012
+    - fix dependencies (No code changes)
+
 0.01 Wed Jan 01/25/12 23:34:30 2012
     - original version
