@@ -9,10 +9,12 @@ my $buiild = Module::Build->new(
     module_name => 'DateTimeX::Factory',
     configure_requires => {'Module::Build' => '0.38'},
     requires => {
-        'Data::Validator'    => '0.05',
-        'DateTime'           => 0,
-        'DateTime::TimeZone' => 0,
-        'Mouse'              => 0,
+        'Data::Validator'            => '0.05',
+        'DateTime'                   => 0,
+        'DateTime::TimeZone'         => 0,
+        'DateTime::Format::MySQL'    => 0,
+        'DateTime::Format::Strptime' => 0,
+        'Mouse'                      => 0,
     },
     build_requires => {
         'Test::LoadAllModules'       => '0.02',
