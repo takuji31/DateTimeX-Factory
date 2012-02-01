@@ -18,7 +18,10 @@ all_pod_files_spelling_ok('lib');
 __DATA__
 Nishibayashi Takuji
 takuji@senchan.jp
-DateTime::Factory
+DateTimeX::Factory
+
+DATETIME
+DateTime
 
 # computer terms
 API
