@@ -192,7 +192,7 @@ Get DateTime::TimeZone instance of current time zone.
 
 Call DateTime->new with default parameter.
 
-  my $datetime = DateTimeX::Factory->create(years => 2012, months => 1, days => 24, hours => 23, minutes => 16, seconds => 5);
+  my $datetime = DateTimeX::Factory->create(year => 2012, month => 1, day => 24, hour => 23, minute => 16, second => 5);
 
 =head2 C<< now(%params) >>, C<< today(%params) >>, C<< from_epoch(%params) >>, C<< last_day_of_month(%params) >>, C<< from_day_of_year(%params) >>
 
