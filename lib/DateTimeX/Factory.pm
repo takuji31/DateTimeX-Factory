@@ -3,7 +3,7 @@ use 5.010_000;
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Data::Validator;
 use DateTime;
@@ -127,7 +127,7 @@ DateTimeX::Factory - DateTime factory module with default timezone.
 
 =head1 VERSION
 
-This document describes DateTimeX::Factory version 0.02.
+This document describes DateTimeX::Factory version 0.03.
 
 =head1 SYNOPSIS
 

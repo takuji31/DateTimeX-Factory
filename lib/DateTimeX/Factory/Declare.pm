@@ -72,7 +72,7 @@ DateTimeX::Factory::Declare - DateTimeX::Factory function interface.
 
 =head1 VERSION
 
-This document describes DateTimeX::Factory::Declare version 0.02.
+This document describes DateTimeX::Factory::Declare version 0.03.
 
 =head1 SYNOPSIS
 

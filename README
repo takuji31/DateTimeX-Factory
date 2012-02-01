@@ -2,7 +2,7 @@ NAME
     DateTimeX::Factory - DateTime factory module with default timezone.
 
 VERSION
-    This document describes DateTimeX::Factory version 0.02.
+    This document describes DateTimeX::Factory version 0.03.
 
 SYNOPSIS
         use DateTimeX::Factory;
@@ -14,18 +14,54 @@ SYNOPSIS
         my $now = $factory->now;
 
         #Class interface
-        local $DateTimeX::Factory::TIME_ZONE = DateTime::TimeZone->new(name => 'Asia/Tokyo');
+        DateTimeX::Factory->set_time_zone(DateTime::TimeZone->new(name => 'Asia/Tokyo'));
         my $now = DateTimeX::Factory->now;
 
 DESCRIPTION
     DateTime factory module with default timezone. This module include
-    wrapper of default constractors and some useful methods.
+    wrapper of default constructors and some useful methods.
 
 METHODS
+  "set_time_zone($time_zone)"
+    If called as instance method, set time_zone for its factory instance
+    methods. If called as class method, set time_zone for class methods.
+
+        #Object interface
+        {
+            my $factory = DateTimeX::Factory->new();
+            say $factory->now->time_zone->name; # floating
+
+            $factory->set_time_zone(DateTime::TimeZone->new(name => 'Asia/Tokyo'));
+            say $factory->now->time_zone->name; # Asia/Tokyo
+
+            #This is also OK
+            $factory->set_time_zone('Asia/Tokyo');
+            say $factory->now->time_zone->name; # Asia/Tokyo
+
+            # set to default time zone (floating)
+            $factory->set_time_zone;
+        }
+
+        #Class interface
+        {
+            DateTimeX::Factory->set_time_zone(DateTime::TimeZone->new(name => 'Asia/Tokyo'));
+            say DateTimeX::Factory->now->time_zone->name; #Asia/Tokyo
+
+            #This is also OK
+            DateTimeX::Factory->set_time_zone('Asia/Tokyo');
+            say DateTimeX::Factory->now->time_zone->name; #Asia/Tokyo
+
+            # set to default time zone (floating)
+            DateTimeX::Factory->set_time_zone;
+        }
+
+  "get_time_zone($time_zone)"
+    Get DateTime::TimeZone instance of current time zone.
+
   "create(%params)"
     Call DateTime->new with default parameter.
 
-      my $datetime = DateTimeX::Factory->create(years => 2012, months => 1, days => 24, hours => 23, minutes => 16, seconds => 5);
+      my $datetime = DateTimeX::Factory->create(year => 2012, month => 1, day => 24, hour => 23, minute => 16, second => 5);
 
   "now(%params)", "today(%params)", "from_epoch(%params)", "last_day_of_month(%params)", "from_day_of_year(%params)"
     See document of DateTime. But, these methods create DateTime instance by
