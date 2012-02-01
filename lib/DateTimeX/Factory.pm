@@ -129,7 +129,7 @@ This document describes DateTimeX::Factory version 0.02.
 =head1 DESCRIPTION
 
 DateTime factory module with default timezone.
-This module include wrapper of default constractors and some useful methods.
+This module include wrapper of default constructors and some useful methods.
 
 =head1 METHODS
 
