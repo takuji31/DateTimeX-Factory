@@ -22,7 +22,10 @@ subtest "instance method" => sub {
 subtest "class method" => sub {
 
     for my $tz (@time_zones) {
-        local $DateTimeX::Factory::TIME_ZONE = DateTime::TimeZone->new(name => $tz);
+        DateTimeX::Factory->set_time_zone(DateTime::TimeZone->new(name => $tz));
+        is(DateTimeX::Factory->now->time_zone->name => $tz, "Correct time zone $tz from class method");
+
+        DateTimeX::Factory->set_time_zone($tz);
         is(DateTimeX::Factory->now->time_zone->name => $tz, "Correct time zone $tz from class method");
     }
 

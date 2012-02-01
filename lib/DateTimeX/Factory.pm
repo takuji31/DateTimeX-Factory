@@ -101,6 +101,23 @@ sub _default_options {
     return %options;
 }
 
+sub set_time_zone {
+    state $validator = Data::Validator->new(
+        time_zone => {isa => 'DateTime::TimeZone', coerce => 1, default => sub{$DEFAULT_TIME_ZONE}},
+    )->with(qw/Method Sequenced/);
+    my ($invocant, $args) = $validator->validate(@_);
+    if(ref $invocant) {
+        $invocant->time_zone($args->{time_zone});
+    } else {
+        $TIME_ZONE = $args->{time_zone};
+    }
+}
+
+sub get_time_zone {
+    my $invocant = shift;
+    ref $invocant ? $invocant->time_zone : $TIME_ZONE;
+}
+
 1;
 __END__
 
@@ -123,7 +140,7 @@ This document describes DateTimeX::Factory version 0.02.
     my $now = $factory->now;
 
     #Class interface
-    local $DateTimeX::Factory::TIME_ZONE = DateTime::TimeZone->new(name => 'Asia/Tokyo');
+    DateTimeX::Factory->set_time_zone(DateTime::TimeZone->new(name => 'Asia/Tokyo'));
     my $now = DateTimeX::Factory->now;
 
 =head1 DESCRIPTION
@@ -132,6 +149,44 @@ DateTime factory module with default timezone.
 This module include wrapper of default constructors and some useful methods.
 
 =head1 METHODS
+
+=head2 C<< set_time_zone($time_zone) >>
+
+If called as instance method, set time_zone for its factory instance methods.
+If called as class method, set time_zone for class methods.
+
+    #Object interface
+    {
+        my $factory = DateTimeX::Factory->new();
+        say $factory->now->time_zone->name; # floating
+
+        $factory->set_time_zone(DateTime::TimeZone->new(name => 'Asia/Tokyo'));
+        say $factory->now->time_zone->name; # Asia/Tokyo
+
+        #This is also OK
+        $factory->set_time_zone('Asia/Tokyo');
+        say $factory->now->time_zone->name; # Asia/Tokyo
+
+        # set to default time zone (floating)
+        $factory->set_time_zone;
+    }
+
+    #Class interface
+    {
+        DateTimeX::Factory->set_time_zone(DateTime::TimeZone->new(name => 'Asia/Tokyo'));
+        say DateTimeX::Factory->now->time_zone->name; #Asia/Tokyo
+
+        #This is also OK
+        DateTimeX::Factory->set_time_zone('Asia/Tokyo');
+        say DateTimeX::Factory->now->time_zone->name; #Asia/Tokyo
+
+        # set to default time zone (floating)
+        DateTimeX::Factory->set_time_zone;
+    }
+
+=head2 C<< get_time_zone($time_zone) >>
+
+Get DateTime::TimeZone instance of current time zone.
 
 =head2 C<< create(%params) >>
 
