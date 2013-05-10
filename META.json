@@ -1,0 +1,73 @@
+{
+   "abstract" : "DateTime factory module with default timezone.",
+   "author" : [
+      "Nishibayashi Takuji <takuji@senchan.jp>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Minilla/v0.4.2, CPAN::Meta::Converter version 2.130880",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "DateTimeX-Factory",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "xt",
+         "inc",
+         "share",
+         "eg",
+         "examples",
+         "author"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::LoadAllModules" : "0.02",
+            "Test::More" : "0.96"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "CPAN::Meta" : "0",
+            "CPAN::Meta::Prereqs" : "0",
+            "Module::Build" : "0.38"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Test::CPAN::Meta" : "0",
+            "Test::MinimumVersion" : "0.10108",
+            "Test::Pod" : "1.41",
+            "Test::Spellunker" : "v0.2.2"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Data::Validator" : "0.05",
+            "DateTime" : "0",
+            "DateTime::Format::MySQL" : "0",
+            "DateTime::Format::Strptime" : "0",
+            "DateTime::TimeZone" : "0",
+            "Mouse" : "0",
+            "perl" : "5.010000"
+         }
+      }
+   },
+   "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/takuji31/p5-datetime-factory/issues"
+      },
+      "homepage" : "https://github.com/takuji31/p5-datetime-factory",
+      "repository" : {
+         "url" : "https://github.com/takuji31/p5-datetime-factory",
+         "web" : "https://github.com/takuji31/p5-datetime-factory"
+      }
+   },
+   "version" : "0.03"
+}

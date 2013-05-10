@@ -1,5 +1,7 @@
 Revision history for Perl extension DateTime::Factory
 
+{{$NEXT}}
+
 0.03 Wed Feb 02/01/12 12:11:34 2012
     - fix pod spell miss
     - add set_time_zone and get_time_zone method
