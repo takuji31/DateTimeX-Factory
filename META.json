@@ -61,13 +61,17 @@
    "release_status" : "unstable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/takuji31/p5-datetime-factory/issues"
+         "web" : "https://github.com/takuji31/DateTimeX-Factory/issues"
       },
-      "homepage" : "https://github.com/takuji31/p5-datetime-factory",
+      "homepage" : "https://github.com/takuji31/DateTimeX-Factory",
       "repository" : {
-         "url" : "https://github.com/takuji31/p5-datetime-factory",
-         "web" : "https://github.com/takuji31/p5-datetime-factory"
+         "type" : "git",
+         "url" : "git://github.com/takuji31/DateTimeX-Factory",
+         "web" : "https://github.com/takuji31/DateTimeX-Factory"
       }
    },
-   "version" : "0.03"
+   "version" : "0.03",
+   "x_contributors" : [
+      "Nishibayashi Takuji <takuji31@gmail.com>"
+   ]
 }
