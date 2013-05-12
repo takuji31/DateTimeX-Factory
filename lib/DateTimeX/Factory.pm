@@ -1,32 +1,17 @@
 package DateTimeX::Factory;
-use 5.010_000;
+use 5.010_001;
 use strict;
 use warnings;
 
 our $VERSION = '0.03';
 
-use Data::Validator;
+use Class::Accessor::Lite (
+    new => 0,
+    rw  => [qw/default_options/],
+);
+
 use DateTime;
-use DateTime::TimeZone;
 use DateTime::Format::Strptime;
-
-my  $DEFAULT_TIME_ZONE = DateTime::TimeZone->new(name => 'floating');
-our $TIME_ZONE = $DEFAULT_TIME_ZONE;
-
-use Mouse::Util::TypeConstraints;
-
-#avoid redefine error
-eval { class_type('DateTime::TimeZone') };
-
-coerce 'DateTime::TimeZone' => from 'Str' => via { DateTime::TimeZone->new(name => $_) };
-
-no Mouse::Util::TypeConstraints;
-use Mouse;
-
-has time_zone => (is => 'rw', isa => 'DateTime::TimeZone', coerce => 1, default => sub { $DEFAULT_TIME_ZONE });
-
-no Mouse;
-
 
 {
     my @METHODS = (
@@ -44,7 +29,7 @@ no Mouse;
         my $alias  = ref $meth ? $meth->[1] : $meth;
         my $code = sub {
             my $invocant = shift;
-            DateTime->$origin($invocant->_default_options, @_);
+            DateTime->$origin(%{$invocant->default_options}, @_);
         };
         {
             no strict 'refs';
@@ -53,70 +38,43 @@ no Mouse;
     }
 }
 
+sub new {
+    my ($class, %default_options) = @_;
+    bless {default_options => \%default_options}, $class;
+}
+
 sub strptime {
-    state $validator = Data::Validator->new(
-        string  => {isa => 'Str'},
-        pattern => {isa => 'Str'},
-    )->with(qw/Method Sequenced/);
-    my ($invocant, $args) = $validator->validate(@_);
+    my ($self, $string, $pattern) = @_;
     return DateTime::Format::Strptime->new(
-        pattern => $args->{pattern},
-        $invocant->_default_options,
-    )->parse_datetime($args->{string});
+        pattern => $pattern,
+        %{$self->default_options},
+    )->parse_datetime($string);
 }
 
 sub from_mysql_datetime {
-    state $validator = Data::Validator->new(
-        string  => {isa => 'Str'},
-    )->with(qw/Method Sequenced/);
-    my ($invocant, $args) = $validator->validate(@_);
-    return if $args->{string} eq '0000-00-00 00:00:00';
-    return $invocant->strptime($args->{string}, '%Y-%m-%d %H:%M:%S');
+    my ($self, $string) = @_;
+
+    return if !defined $string ||  $string eq '0000-00-00 00:00:00';
+
+    return $self->strptime($string, '%Y-%m-%d %H:%M:%S');
 }
 
 sub from_ymd {
-    state $validator = Data::Validator->new(
-        string  => {isa => 'Str'},
-        delimiter => {isa => 'Str', default => '-'},
-    )->with(qw/Method Sequenced/);
-    my ($invocant, $args) = $validator->validate(@_);
-    return $invocant->strptime($args->{string}, join $args->{delimiter}, '%Y','%m','%d');
+    my ($self, $string, $delimiter) = @_;
+
+    $delimiter //= '-';
+    return $self->strptime($string, join($delimiter, '%Y','%m','%d'));
 }
 
 sub from_mysql_date {
-    state $validator = Data::Validator->new(
-        string  => {isa => 'Str'},
-    )->with(qw/Method Sequenced/);
-    my ($invocant, $args) = $validator->validate(@_);
-    return if $args->{string} eq '0000-00-00';
-    return $invocant->from_ymd($args->{string});
+    my ($self, $string) = @_;
+
+    return if !defined $string ||  $string eq '0000-00-00';
+    return $self->from_ymd($string);
 }
 
 sub yesterday {shift->today(@_)->subtract(days => 1)}
 sub tommorow  {shift->today(@_)->add(days => 1)}
-
-sub _default_options {
-    my $invocant = shift;
-    my %options = (time_zone => ref $invocant ? $invocant->time_zone : $TIME_ZONE);
-    return %options;
-}
-
-sub set_time_zone {
-    state $validator = Data::Validator->new(
-        time_zone => {isa => 'DateTime::TimeZone', coerce => 1, default => sub{$DEFAULT_TIME_ZONE}},
-    )->with(qw/Method Sequenced/);
-    my ($invocant, $args) = $validator->validate(@_);
-    if(ref $invocant) {
-        $invocant->time_zone($args->{time_zone});
-    } else {
-        $TIME_ZONE = $args->{time_zone};
-    }
-}
-
-sub get_time_zone {
-    my $invocant = shift;
-    ref $invocant ? $invocant->time_zone : $TIME_ZONE;
-}
 
 1;
 __END__
