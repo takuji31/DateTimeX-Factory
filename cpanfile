@@ -1,11 +1,13 @@
-requires 'Data::Validator', '0.05';
+requires 'perl' => '5.010001';
+requires 'Class::Accessor::Lite', '0.04';
 requires 'DateTime';
-requires 'DateTime::Format::MySQL';
 requires 'DateTime::Format::Strptime';
-requires 'DateTime::TimeZone';
-requires 'Mouse';
 
 on build => sub {
-    requires 'Test::LoadAllModules', '0.02';
     requires 'Test::More', '0.96';
+    requires 'Module::Build', '0.38';
+};
+
+on configure => sub {
+    requires 'Module::Build', '0.38';
 };

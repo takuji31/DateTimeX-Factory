@@ -27,7 +27,7 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Test::LoadAllModules" : "0.02",
+            "Module::Build" : "0.38",
             "Test::More" : "0.96"
          }
       },
@@ -48,12 +48,9 @@
       },
       "runtime" : {
          "requires" : {
-            "Data::Validator" : "0.05",
+            "Class::Accessor::Lite" : "0.04",
             "DateTime" : "0",
-            "DateTime::Format::MySQL" : "0",
             "DateTime::Format::Strptime" : "0",
-            "DateTime::TimeZone" : "0",
-            "Mouse" : "0",
             "perl" : "5.010001"
          }
       }
