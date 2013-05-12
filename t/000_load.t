@@ -1,13 +1,8 @@
 use strict;
-use Test::LoadAllModules;
+use warnings;
 use Test::More;
 
 BEGIN {
-    all_uses_ok(
-        search_path => "DateTimeX::Factory",
-        except => [],
-    );
+    use_ok "DateTimeX::Factory";
 }
-
-
-diag "Testing DateTimeX::Factory/$DateTimeX::Factory::VERSION";
+done_testing;
