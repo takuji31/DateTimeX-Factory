@@ -4,7 +4,7 @@ DateTimeX::Factory - DateTime factory module with default options.
 
 # VERSION
 
-This document describes DateTimeX::Factory version 0.03.
+This document describes DateTimeX::Factory version 0.10.0.
 
 # SYNOPSIS
 
@@ -82,9 +82,9 @@ Create previous day DateTime instance.
 
 # DEPENDENCIES
 
-Perl 5.10.0 or later.
+Perl 5.10.1 or later.
+[Class::Accessor::Lite](http://search.cpan.org/perldoc?Class::Accessor::Lite)
 [DateTime](http://search.cpan.org/perldoc?DateTime)
-[DateTime::Format::MySQL](http://search.cpan.org/perldoc?DateTime::Format::MySQL)
 [DateTime::Format::Strptime](http://search.cpan.org/perldoc?DateTime::Format::Strptime)
 
 # BUGS
