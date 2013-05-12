@@ -150,9 +150,9 @@ Create previous day DateTime instance.
 
 =head1 DEPENDENCIES
 
-Perl 5.10.0 or later.
+Perl 5.10.1 or later.
+L<Class::Accessor::Lite>
 L<DateTime>
-L<DateTime::Format::MySQL>
 L<DateTime::Format::Strptime>
 
 =head1 BUGS
