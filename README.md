@@ -22,6 +22,12 @@ This module include wrapper of default constructors and some useful methods.
 
 # METHODS
 
+## `new(%params)`
+
+Create factory instance. all parameters thrown to factory methods
+
+    my $factory = DateTimeX::Factory->new(time_zone => 'Asia/Tokyo');
+
 ## `create(%params)`
 
 Call DateTime->new with default parameter.

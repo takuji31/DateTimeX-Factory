@@ -90,6 +90,12 @@ This module include wrapper of default constructors and some useful methods.
 
 =head1 METHODS
 
+=head2 C<< new(%params) >>
+
+Create factory instance. all parameters thrown to factory methods
+
+  my $factory = DateTimeX::Factory->new(time_zone => 'Asia/Tokyo');
+
 =head2 C<< create(%params) >>
 
 Call DateTime->new with default parameter.
