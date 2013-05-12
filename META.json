@@ -1,7 +1,7 @@
 {
-   "abstract" : "DateTime factory module with default timezone.",
+   "abstract" : "DateTime factory module with default options.",
    "author" : [
-      "Nishibayashi Takuji <takuji@senchan.jp>"
+      "Nishibayashi Takuji <takuji31@gmail.com>"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Minilla/v0.4.2, CPAN::Meta::Converter version 2.130880",
@@ -54,7 +54,7 @@
             "DateTime::Format::Strptime" : "0",
             "DateTime::TimeZone" : "0",
             "Mouse" : "0",
-            "perl" : "5.010000"
+            "perl" : "5.010001"
          }
       }
    },
@@ -72,6 +72,6 @@
    },
    "version" : "0.03",
    "x_contributors" : [
-      "Nishibayashi Takuji <takuji31@gmail.com>"
+      "Nishibayashi Takuji <takuji@senchan.jp>"
    ]
 }
