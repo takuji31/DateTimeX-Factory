@@ -81,7 +81,7 @@ __END__
 
 =head1 NAME
 
-DateTimeX::Factory - DateTime factory module with default timezone.
+DateTimeX::Factory - DateTime factory module with default options.
 
 =head1 VERSION
 
@@ -91,66 +91,23 @@ This document describes DateTimeX::Factory version 0.03.
 
     use DateTimeX::Factory;
 
-    #Object interface
     my $factory = DateTimeX::Factory->new(
         time_zone => 'Asia/Tokyo',
     );
     my $now = $factory->now;
 
-    #Class interface
-    DateTimeX::Factory->set_time_zone(DateTime::TimeZone->new(name => 'Asia/Tokyo'));
-    my $now = DateTimeX::Factory->now;
-
 =head1 DESCRIPTION
 
-DateTime factory module with default timezone.
+DateTime factory module with default options.
 This module include wrapper of default constructors and some useful methods.
 
 =head1 METHODS
-
-=head2 C<< set_time_zone($time_zone) >>
-
-If called as instance method, set time_zone for its factory instance methods.
-If called as class method, set time_zone for class methods.
-
-    #Object interface
-    {
-        my $factory = DateTimeX::Factory->new();
-        say $factory->now->time_zone->name; # floating
-
-        $factory->set_time_zone(DateTime::TimeZone->new(name => 'Asia/Tokyo'));
-        say $factory->now->time_zone->name; # Asia/Tokyo
-
-        #This is also OK
-        $factory->set_time_zone('Asia/Tokyo');
-        say $factory->now->time_zone->name; # Asia/Tokyo
-
-        # set to default time zone (floating)
-        $factory->set_time_zone;
-    }
-
-    #Class interface
-    {
-        DateTimeX::Factory->set_time_zone(DateTime::TimeZone->new(name => 'Asia/Tokyo'));
-        say DateTimeX::Factory->now->time_zone->name; #Asia/Tokyo
-
-        #This is also OK
-        DateTimeX::Factory->set_time_zone('Asia/Tokyo');
-        say DateTimeX::Factory->now->time_zone->name; #Asia/Tokyo
-
-        # set to default time zone (floating)
-        DateTimeX::Factory->set_time_zone;
-    }
-
-=head2 C<< get_time_zone($time_zone) >>
-
-Get DateTime::TimeZone instance of current time zone.
 
 =head2 C<< create(%params) >>
 
 Call DateTime->new with default parameter.
 
-  my $datetime = DateTimeX::Factory->create(year => 2012, month => 1, day => 24, hour => 23, minute => 16, second => 5);
+  my $datetime = $factory->create(year => 2012, month => 1, day => 24, hour => 23, minute => 16, second => 5);
 
 =head2 C<< now(%params) >>, C<< today(%params) >>, C<< from_epoch(%params) >>, C<< last_day_of_month(%params) >>, C<< from_day_of_year(%params) >>
 
@@ -161,52 +118,49 @@ But, these methods create DateTime instance by original method with default para
 
 Parse string by DateTime::Format::Strptime with default parameter.
 
-  my $datetime = DateTimeX::Factory->strptime('2012-01-24 23:16:05', '%Y-%m-%d %H:%M:%S');
+  my $datetime = $factory->strptime('2012-01-24 23:16:05', '%Y-%m-%d %H:%M:%S');
 
 =head2 C<< from_mysql_datetime($string) >>
 
 Parse MySQL DATETIME string with default parameter.
 
-  #equals my $datetime = DateTimeX::Factory->strptime('2012-01-24 23:16:05', '%Y-%m-%d %H:%M:%S');
-  my $datetime = DateTimeX::Factory->from_mysql_datetime('2012-01-24 23:16:05');
+  #equals my $datetime = $factory->strptime('2012-01-24 23:16:05', '%Y-%m-%d %H:%M:%S');
+  my $datetime = $factory->from_mysql_datetime('2012-01-24 23:16:05');
 
 =head2 C<< from_mysql_date($string) >>
 
 Parse MySQL DATE string with default parameter.
 
-  #equals my $date = DateTimeX::Factory->strptime('2012-01-24', '%Y-%m-%d');
-  my $date = DateTimeX::Factory->from_mysql_date('2012-01-24');
+  #equals my $date = $factory->strptime('2012-01-24', '%Y-%m-%d');
+  my $date = $factory->from_mysql_date('2012-01-24');
 
 =head2 C<< from_ymd($string, $delimiter) >>
 
 Parse string like DateTime::ymd return value with default parameter.
 
-  #equals my $date = DateTimeX::Factory->strptime('2012/01/24', '%Y/%m/%d');
-  my $date = DateTimeX::Factory->from_ymd('2012-01-24', '/');
+  #equals my $date = $factory->strptime('2012/01/24', '%Y/%m/%d');
+  my $date = $factory->from_ymd('2012-01-24', '/');
 
 =head2 C<< tommorow(%params) >>
 
 Create next day DateTime instance.
 
-  #equals my $tommorow = DateTimeX::Factory->today->add(days => 1);
-  my $tommorow = DateTimeX::Factory->tommorow;
+  #equals my $tommorow = $factory->today->add(days => 1);
+  my $tommorow = $factory->tommorow;
 
 =head2 C<< yesterday(%params) >>
 
 Create previous day DateTime instance.
 
-  #equals my $yesterday = DateTimeX::Factory->today->subtract(days => 1);
-  my $yesterday = DateTimeX::Factory->yesterday;
+  #equals my $yesterday = $factory->today->subtract(days => 1);
+  my $yesterday = $factory->yesterday;
 
 =head1 DEPENDENCIES
 
 Perl 5.10.0 or later.
-L<Data::Validator>
 L<DateTime>
 L<DateTime::Format::MySQL>
 L<DateTime::Format::Strptime>
-L<DateTime::TimeZone>
-L<Mouse>
 
 =head1 BUGS
 
