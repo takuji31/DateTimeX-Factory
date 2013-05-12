@@ -174,7 +174,7 @@ L<perl>
 
 =head1 AUTHOR
 
-Nishibayashi Takuji E<lt>takuji@senchan.jpE<gt>
+Nishibayashi Takuji E<lt>takuji31@gmail.comE<gt>
 
 =head1 LICENSE AND COPYRIGHT
 
