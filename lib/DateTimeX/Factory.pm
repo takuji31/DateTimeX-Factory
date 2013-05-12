@@ -13,34 +13,21 @@ use Class::Accessor::Lite (
 use DateTime;
 use DateTime::Format::Strptime;
 
-{
-    my @METHODS = (
-        [new => 'create'],
-        qw/
-            from_epoch
-            now
-            today
-            last_day_of_month
-            from_day_of_year
-        /,
-    );
-    for my $meth (@METHODS) {
-        my $origin = ref $meth ? $meth->[0] : $meth;
-        my $alias  = ref $meth ? $meth->[1] : $meth;
-        my $code = sub {
-            my $invocant = shift;
-            DateTime->$origin(%{$invocant->default_options}, @_);
-        };
-        {
-            no strict 'refs';
-            *{__PACKAGE__."::".$alias} = $code;
-        }
-    }
-}
-
 sub new {
     my ($class, %default_options) = @_;
     bless {default_options => \%default_options}, $class;
+}
+
+sub create            {shift->_call_factory_method('new' => @_)}
+sub now               {shift->_call_factory_method('now' => @_)}
+sub from_epoch        {shift->_call_factory_method('from_epoch' => @_)}
+sub today             {shift->_call_factory_method('today' => @_)}
+sub last_day_of_month {shift->_call_factory_method('last_day_of_month' => @_)}
+sub from_day_of_year  {shift->_call_factory_method('from_day_of_year' => @_)}
+
+sub _call_factory_method {
+    my ($self, $method, @params) = @_;
+    DateTime->$method(%{$self->default_options}, @params);
 }
 
 sub strptime {
