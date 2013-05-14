@@ -3,7 +3,7 @@ use 5.010_001;
 use strict;
 use warnings;
 
-our $VERSION = '0.10.0';
+our $VERSION = '1.00';
 
 use Class::Accessor::Lite (
     new => 0,
@@ -72,7 +72,7 @@ DateTimeX::Factory - DateTime factory module with default options.
 
 =head1 VERSION
 
-This document describes DateTimeX::Factory version 0.10.0.
+This document describes DateTimeX::Factory version 1.00.
 
 =head1 SYNOPSIS
 

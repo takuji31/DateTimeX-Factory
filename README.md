@@ -4,7 +4,7 @@ DateTimeX::Factory - DateTime factory module with default options.
 
 # VERSION
 
-This document describes DateTimeX::Factory version 0.10.0.
+This document describes DateTimeX::Factory version 1.00.
 
 # SYNOPSIS
 
